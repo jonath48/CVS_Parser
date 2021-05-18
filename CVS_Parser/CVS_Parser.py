@@ -35,8 +35,6 @@ CVS_results = gmaps.places_nearby(
     name="CVS Pharmacy",
     type="pharmacy",
 )
-<<<<<<< HEAD
-=======
 
 # print(CVS_results)
 
@@ -58,16 +56,17 @@ lng = locate["lng"]
 print(lat)
 print(lng)
 
-
-for place in CVS_results["results"]:
-    curr_place_id = place["place_id"]
-    curr_loc = place["geometry"]
-    # for geom in place["geometry"]:
-    # for lat
-    curr_fields = ["name", "formatted_phone_number", "type"]
-    place_details = gmaps.place(place_id=curr_place_id, fields=curr_fields)
-    print(curr_loc)
-    print(place_details)
+with open("cvs.txt", "w+") as file:
+    for place in CVS_results["results"]:
+        curr_place_id = place["place_id"]
+        curr_loc = place["geometry"]
+        # for geom in place["geometry"]:
+        # for lat
+        curr_fields = ["name", "formatted_phone_number", "type"]
+        place_details = gmaps.place(place_id=curr_place_id, fields=curr_fields)
+        file.write(str(curr_loc))
+        file.write(str(place_details))
+        file.write("\n")
 
 # print(CVS_results)
 
@@ -88,4 +87,3 @@ for place in CVS_results["results"]:
 # directions_result = gmaps.directions(
 #     "Sydney Town Hall", "Parramatta, NSW", mode="transit", departure_time=now
 # )
->>>>>>> dbfea056c5574eb29f433b80fe0e98774ba8bc56
