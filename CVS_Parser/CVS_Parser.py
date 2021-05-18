@@ -1,11 +1,16 @@
 from os import name
 import googlemaps
 from datetime import datetime
+import argparse
 
-# from GoogleMapsAPIKey import get_my_key
+key_parser = argparse.ArgumentParser(
+    description="Finds the nearest CVS and gives you directions to it. Requires a Google API key."
+)
+key_parser.add_argument("API_key", help="Enter Google API Key here.")
+args = key_parser.parse_args()
 
-# API_KEY = get_my_key()
-API_KEY = "key"
+API_KEY = args.API_key
+print(API_KEY)
 
 gmaps = googlemaps.Client(key=API_KEY)
 
