@@ -5,7 +5,7 @@ from datetime import datetime
 # from GoogleMapsAPIKey import get_my_key
 
 # API_KEY = get_my_key()
-API_KEY = "AIzaSyA_dgYK0yJBMdcj2QoL7egwV0ylLsifn-0"
+API_KEY = "key"
 
 gmaps = googlemaps.Client(key=API_KEY)
 
