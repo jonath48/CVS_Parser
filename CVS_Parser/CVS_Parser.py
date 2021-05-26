@@ -10,9 +10,11 @@ key_parser = argparse.ArgumentParser(
     description="Finds the nearest CVS and gives you directions to it. Requires a Google API key."
 )
 key_parser.add_argument("API_key", help="Enter Google API Key here.")
+key_parser.add_argument("-r", "--range", type=int, default=100, help="The range in miles in which to parser for CVS (default: 100 miles)")
 args = key_parser.parse_args()
 
 API_KEY = args.API_key
+CVS_RANGE = args.range
 gmaps = googlemaps.Client(key=API_KEY)
 
 url = "https://ipinfo.io/json"
@@ -38,7 +40,7 @@ userCoor = (lat_int, lng_int)
 
 CVS_results = gmaps.places_nearby(
     location=loc,
-    radius=160934,
+    radius=1609.34 * CVS_RANGE,
     open_now=False,
     name="CVS Pharmacy",
     type="pharmacy",
@@ -89,6 +91,16 @@ dirLocation = storeCoor[int(selection)]
 
 destLocation = gmaps.reverse_geocode(dirLocation)
 
+# from codefurther.directions import GetDirections
+
+
+# direct = GetDirections(
+#     user_location[0]["formatted_address"],
+#     destLocation[0]["formatted_address"],
+#     mode="walking",
+# )
+# direct.footer
+
 from datetime import datetime, timedelta
 
 results = gmaps.directions(
@@ -134,11 +146,12 @@ markers = [
     "color:blue|size:mid|label:" + chr(65 + i) + "|" + r
     for i, r in enumerate(marker_points)
 ]
+
 result_map = gmaps.static_map(
-    center=waypoints[0],
-    scale=2,
-    zoom=13,
-    size=[640, 640],
+    center=markers[0],  # waypoints[0],
+    scale=10,
+    zoom=10,
+    size=[1280, 1280],
     format="jpg",
     maptype="roadmap",
     markers=markers,
