@@ -1,3 +1,3 @@
 # CVS_Parser
 
-Finds the nearest CVS and provides you with directions to get there.
+Finds a list of the closest CVS stores. User indicates which to travel to, and is given a map to the store.
